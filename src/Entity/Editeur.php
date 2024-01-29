@@ -15,6 +15,11 @@ class Editeur
 
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
+    //Grâce à cette méthode Easy Admin pourra afficher les éditeurs
+    public function __toString()
+    {
+        return $this->getNom() ;
+    }
 
     public function getId(): ?int
     {

@@ -30,7 +30,7 @@ class Livre
 
     #[ORM\ManyToOne(inversedBy: 'livres')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?auteur $auteur = null;
+    private ?Auteur $auteur = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -97,12 +97,12 @@ class Livre
         return $this;
     }
 
-    public function getAuteur(): ?auteur
+    public function getAuteur(): ?Auteur
     {
         return $this->auteur;
     }
 
-    public function setAuteur(?auteur $auteur): static
+    public function setAuteur(?Auteur $auteur): static
     {
         $this->auteur = $auteur;
 

@@ -15,6 +15,11 @@ class Genre
 
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
+      //Grâce à cette méthode Easy Admin pourra afficher les genres
+      public function __toString()
+      {
+          return $this->getNom() ;
+      }
 
     public function getId(): ?int
     {
