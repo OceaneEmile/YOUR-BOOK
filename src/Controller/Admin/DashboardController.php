@@ -8,6 +8,7 @@ use App\Entity\Stock;
 use App\Entity\Usure;
 use App\Entity\Auteur;
 use App\Entity\Editeur;
+use App\Entity\Exemplaire;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -55,5 +56,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Usure', 'fas fa-list', Usure::class);
         yield MenuItem::linkToCrud('Stock', 'fas fa-list', Stock::class);
         yield MenuItem::linkToCrud('Livre', 'fas fa-book', Livre::class);
+        yield MenuItem::linkToCrud('Exemplaire', 'fas fa-book', Exemplaire::class);
     }
 }

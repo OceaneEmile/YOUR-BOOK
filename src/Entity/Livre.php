@@ -39,6 +39,14 @@ class Livre
     #[ORM\ManyToMany(targetEntity: Genre::class)]
     private Collection $genres;
 
+    //Grâce à cette méthode Easy Admin pourra afficher les livres
+    public function __toString()
+    {
+        // je recuperer le nom de editeur , ici je n'ai pas besoin de mettre GetNom car j'ai deja getnom dans la fonction toString dans entity editeur
+        //return $this->getTitre() . ' - '.$this->getEditeur()->getNom();
+        return $this->getTitre() . ' - '.$this->getEditeur();
+    }
+
     public function __construct()
     {
         $this->genres = new ArrayCollection();
