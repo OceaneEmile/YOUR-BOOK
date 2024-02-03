@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\EmpruntRepository;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -16,7 +17,7 @@ class Emprunt
 
     #[ORM\ManyToOne(inversedBy: 'emprunts')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?adhérent $aherent = null;
+    private ?Adherent $adherent = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -31,19 +32,22 @@ class Emprunt
     #[ORM\Column]
     private ?bool $statut = null;
 
+    //private ?\DateTimeInterface $date_previsionnelle = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAherent(): ?adhérent
+    public function getAdherent(): ?Adherent
     {
-        return $this->aherent;
+        return $this->adherent;
     }
 
-    public function setAherent(?adhérent $aherent): static
+    public function setAdherent(?Adherent $adherent): self
     {
-        $this->aherent = $aherent;
+        $this->adherent = $adherent;
 
         return $this;
     }
@@ -53,7 +57,7 @@ class Emprunt
         return $this->exemplaire;
     }
 
-    public function setExemplaire(?Exemplaire $exemplaire): static
+    public function setExemplaire(?Exemplaire $exemplaire): self
     {
         $this->exemplaire = $exemplaire;
 
@@ -65,7 +69,7 @@ class Emprunt
         return $this->date_emprunt;
     }
 
-    public function setDateEmprunt(\DateTimeInterface $date_emprunt): static
+    public function setDateEmprunt(\DateTimeInterface $date_emprunt): self
     {
         $this->date_emprunt = $date_emprunt;
 
@@ -77,7 +81,7 @@ class Emprunt
         return $this->date_retour;
     }
 
-    public function setDateRetour(?\DateTimeInterface $date_retour): static
+    public function setDateRetour(?\DateTimeInterface $date_retour): self
     {
         $this->date_retour = $date_retour;
 
@@ -89,10 +93,29 @@ class Emprunt
         return $this->statut;
     }
 
-    public function setStatut(bool $statut): static
+    public function setStatut(bool $statut): self
     {
         $this->statut = $statut;
 
         return $this;
+    }
+    /*
+    public function setDatePrevisionnelle(): self
+    {
+        $datePrevisionnelle = DateTime::createFromInterface($this->getDateEmprunt());
+        $datePrevisionnelle->modify('+20days');
+        $this->setDatePrevisionnelle($datePrevisionnelle);
+        return $this;
+    }
+    */
+
+    public function getDatePrevisionnelle(): ?\DateTimeInterface
+    {
+        $datePrevisionnelle = null;
+        if ($this->getDateEmprunt()) {
+            $datePrevisionnelle = DateTime::createFromInterface($this->getDateEmprunt());
+            $datePrevisionnelle->modify('+20days');
+        }
+        return $datePrevisionnelle;
     }
 }

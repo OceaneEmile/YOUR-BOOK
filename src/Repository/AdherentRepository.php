@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\Adhérent;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Adherent;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
- * @extends ServiceEntityRepository<Adhérent>
+ * @extends ServiceEntityRepository<adherent>
  *
- * @method Adhérent|null find($id, $lockMode = null, $lockVersion = null)
- * @method Adhérent|null findOneBy(array $criteria, array $orderBy = null)
- * @method Adhérent[]    findAll()
- * @method Adhérent[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Adherent|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Adherent|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Adherent[]    findAll()
+ * @method Adherent[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AdhérentRepository extends ServiceEntityRepository
+class AdherentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Adhérent::class);
+        parent::__construct($registry, Adherent::class);
     }
 
 //    /**
-//     * @return Adhérent[] Returns an array of Adhérent objects
+//     * @return adherent[] Returns an array of adherent objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class AdhérentRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Adhérent
+//    public function findOneBySomeField($value): ?adherent
 //    {
 //        return $this->createQueryBuilder('a')
 //            ->andWhere('a.exampleField = :val')

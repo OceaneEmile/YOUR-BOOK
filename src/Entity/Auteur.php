@@ -28,6 +28,7 @@ class Auteur
     {
         $this->livres = new ArrayCollection();
     }
+    //Grâce à cette méthode Easy Admin pourra afficher les auteurs
     public function __toString()
     {
         return $this->getNom() . ' '.$this->getPrenom();

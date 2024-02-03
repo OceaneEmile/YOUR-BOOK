@@ -25,6 +25,12 @@ class Exemplaire
     #[ORM\JoinColumn(nullable: false)]
     private ?Livre $livre = null;
 
+    public function __toString()
+    {
+        return $this->getId(). ''.$this->getLivre();
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;

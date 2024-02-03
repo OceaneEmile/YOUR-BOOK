@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\AdhérentRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\AdherentRepository;
+use App\Repository\AdhérentRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
-#[ORM\Entity(repositoryClass: AdhérentRepository::class)]
-class Adhérent
+#[ORM\Entity(repositoryClass: AdherentRepository::class)]
+class Adherent
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -30,8 +31,13 @@ class Adhérent
     #[ORM\Column]
     private ?bool $caution = null;
 
-    #[ORM\OneToMany(mappedBy: 'aherent', targetEntity: Emprunt::class)]
+    #[ORM\OneToMany(mappedBy: 'adherent', targetEntity: Emprunt::class)]
     private Collection $emprunts;
+
+    public function __toString()
+    {
+        return $this->getId() . ' '.$this->getNom() . ' '.$this->getPrenom();
+    }
 
     public function __construct()
     {
@@ -115,7 +121,7 @@ class Adhérent
     {
         if (!$this->emprunts->contains($emprunt)) {
             $this->emprunts->add($emprunt);
-            $emprunt->setAherent($this);
+            $emprunt->setAdherent($this);
         }
 
         return $this;
@@ -125,8 +131,8 @@ class Adhérent
     {
         if ($this->emprunts->removeElement($emprunt)) {
             // set the owning side to null (unless already changed)
-            if ($emprunt->getAherent() === $this) {
-                $emprunt->setAherent(null);
+            if ($emprunt->getAdherent() === $this) {
+                $emprunt->setAdherent(null);
             }
         }
 
