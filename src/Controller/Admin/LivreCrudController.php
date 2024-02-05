@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 
 class LivreCrudController extends AbstractCrudController
 {
@@ -29,6 +30,8 @@ class LivreCrudController extends AbstractCrudController
         yield BooleanField::new('archive');
 
         yield TextareaField::new('imageFile')->setFormType(VichImageType::class);
+        // je récupere ce qu'il y a dans la config vich uploader, la destination de l'image
+        yield ImageField::new('imageName')->setBasePath('/images/livres')->hideOnForm();
         yield AssociationField::new('auteur');
         yield AssociationField::new('editeur');
         yield AssociationField::new('genres');

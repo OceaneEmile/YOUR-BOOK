@@ -5,10 +5,10 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\LivreRepository;
-use Vich\UploaderBundle\Entity\File;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: LivreRepository::class)]
 #[Vich\Uploadable]
@@ -171,6 +171,16 @@ class Livre
     public function getImageFile(): ?File
     {
         return $this->imageFile;
+    }
+    public function setImageFile(?File $imageFile): self
+    {
+        $this->imageFile = $imageFile;
+    
+        if ($imageFile !== null) {
+            $this->updatedAt = new \DateTimeImmutable('now');
+        }
+    
+        return $this;
     }
 
     public function setImageName(?string $imageName): void
