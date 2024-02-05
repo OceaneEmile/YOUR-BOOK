@@ -52,7 +52,7 @@ class Livre
     private ?int $imageSize = null;
 
     #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updatedAt = null;
+    //private ?\DateTimeImmutable $updatedAt = null;
 
 
     //Grâce à cette méthode Easy Admin pourra afficher les livres
@@ -213,4 +213,5 @@ class Livre
 
         return $this;
     }
+
 }

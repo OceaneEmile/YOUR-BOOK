@@ -3,12 +3,14 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Livre;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
 class LivreCrudController extends AbstractCrudController
 {
@@ -20,9 +22,13 @@ class LivreCrudController extends AbstractCrudController
     //C'est dans cette méthode qu'on va configurer les champs
     public function configureFields(string $pageName): iterable
     {
-        //Appel de la méthode du parent
-        yield from parent::configureFields($pageName);
-        // on ajoute les champs qui manquent de type association
+        
+        yield TextField::new('titre');
+        yield TextField::new('isbn');
+        yield TextareaField::new('description');
+        yield BooleanField::new('archive');
+
+        yield TextareaField::new('imageFile')->setFormType(VichImageType::class);
         yield AssociationField::new('auteur');
         yield AssociationField::new('editeur');
         yield AssociationField::new('genres');
